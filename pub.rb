@@ -13,13 +13,13 @@ class Pub
   end
 
   def customer_buy_drink(punter, drink)
-    if punter.age >= 18
+    if punter.age >= 18 && punter.drunkenness <6
       add_to_till(drink.price)
       punter.wallet -= drink.price
+      punter.drunkenness += drink.alcohol_level
     else
       return "Yer barred!"
     end
-
   end
 
 end

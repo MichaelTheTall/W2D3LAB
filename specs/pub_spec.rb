@@ -8,14 +8,14 @@ class PubTest < MiniTest::Test
 
   def setup
 
-    @customer1 = Customer.new("Bob", 20, 19)
-    @customer2 = Customer.new("Helen", 50, 30)
-    @customer3 = Customer.new("Larry", 10, 16)
+    @customer1 = Customer.new("Bob", 20, 19, 0)
+    @customer2 = Customer.new("Helen", 50, 30, 0)
+    @customer3 = Customer.new("Larry", 10, 16, 0)
+    @customer4 = Customer.new("Ben", 10, 16, 0)
 
-
-    @lager = Drink.new("Lager", 3)
-    @stout = Drink.new("Stout", 5)
-    @cider = Drink.new("Cider", 2)
+    @lager = Drink.new("Lager", 3, 1)
+    @stout = Drink.new("Stout", 5, 2)
+    @cider = Drink.new("Cider", 2, 1)
 
     @drinks = [@lager, @stout, @cider]
 
@@ -44,11 +44,15 @@ class PubTest < MiniTest::Test
     @pub.customer_buy_drink(@customer1, @stout)
     assert_equal(15, @customer1.wallet)
     assert_equal(1005, @pub.till)
+    assert_equal(2, @customer1.drunkenness)
   end
 
   def test_customer_underage
-    @pub.customer_buy_drink(@customer3, @lager)
     assert_equal("Yer barred!", @pub.customer_buy_drink(@customer3, @lager))
+  end
+
+  def test_customer_drunk
+    assert_equal("Yer barred!", @pub.customer_buy_drink(@customer4, @cider))
   end
 
 end
