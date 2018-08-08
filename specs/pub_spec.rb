@@ -19,6 +19,9 @@ class PubTest < MiniTest::Test
     @stout = Drink.new("Stout", 5, 2)
     @cider = Drink.new("Cider", 2, 1)
 
+    @chips = Food.new("Chips", 4, 1)
+    @pie = Food.new("Pie", 5, 2)
+
     @drinks = [@lager, @stout, @cider]
 
     @pub = Pub.new("The Angry Badger", 1000, @drinks)
@@ -55,6 +58,13 @@ class PubTest < MiniTest::Test
 
   def test_customer_drunk
     assert_equal("Yer barred!", @pub.customer_buy_drink(@customer4, @cider))
+  end
+
+  def test_customer_buy_food
+    @customer2.drunkenness = 7
+    @customer2.buy_food(@pie)
+    assert_equal(5, @customer2.drunkenness)
+    assert_equal(45, @customer2.wallet)
   end
 
 end
