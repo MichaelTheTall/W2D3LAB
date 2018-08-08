@@ -33,4 +33,9 @@ def test_pub_has_drinks
   assert_equal(3, @pub.drinks.count)
 end
 
+def test_add_to_till
+  @pub.add_to_till(50)
+  assert_equal(1050, @pub.till)
+end
+
 end
