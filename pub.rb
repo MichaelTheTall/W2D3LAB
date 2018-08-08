@@ -12,4 +12,8 @@ def add_to_till(amount)
   @till += amount
 end
 
+def customer_buy_drink(drink)
+  add_to_till(drink.price)
+end
+
 end

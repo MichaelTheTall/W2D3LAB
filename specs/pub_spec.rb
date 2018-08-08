@@ -38,4 +38,11 @@ def test_add_to_till
   assert_equal(1050, @pub.till)
 end
 
+def test_customer_buy_drink
+  @customer1.buy_drink(@stout)
+  @pub.customer_buy_drink(@stout)
+  assert_equal(15, @customer1.wallet)
+  assert_equal(1005, @pub.till)
+end
+
 end
